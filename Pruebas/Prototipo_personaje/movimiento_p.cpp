@@ -10,6 +10,21 @@ double Movimiento_p::getPosy() const
     return posy;
 }
 
+void Movimiento_p::setPosy(double value)
+{
+    posy = value;
+}
+
+void Movimiento_p::setVel(double value)
+{
+    vel = value;
+}
+
+void Movimiento_p::setAng(double value)
+{
+    ang = value;
+}
+
 Movimiento_p::Movimiento_p()
 {
 

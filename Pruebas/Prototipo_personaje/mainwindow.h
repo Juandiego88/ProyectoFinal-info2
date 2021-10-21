@@ -29,6 +29,7 @@ public:
 
 public slots:
     void Mover();
+    void mousePressEvent(QMouseEvent *event);
 
 
 private:

@@ -4,6 +4,8 @@
 #include <iostream>
 #include <QDebug>
 
+#include <QMouseEvent>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -39,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     //Inicializamos la ec. de mov
     //double rad = (45*3.141598)/180;
-    movimiento = new Movimiento_p(30,30,0,0);
+    movimiento = new Movimiento_p(30,30,60,0);
     scene->addItem(ball);
     ball->setFlag(QGraphicsItem::ItemIsFocusable);
     ball->setFocus();
@@ -53,9 +55,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timer,SIGNAL(timeout()),this,SLOT(Mover()));
     //connect(timer,SIGNAL(timeout()),this,SLOT(movers(60,180)));
     timer->start(100);
-
-
-
 }
 
 MainWindow::~MainWindow()
@@ -121,13 +120,30 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
 
 void MainWindow::Mover()
 {
-
-
     movimiento->CalcularVelocidad();
     movimiento->CalcularPosicion();
     ball->Mover(movimiento->getPosx(),movimiento->getPosy());
-    ball->MoveRight();
+//    ball->MoveRight();
     view->centerOn(ball->x(),ball->y());
+}
+
+void MainWindow::mousePressEvent(QMouseEvent *event){
+    if(event->button() == Qt::RightButton) {
+    qDebug() << "Boton Der (Aux)";
+    }
+    else if(event->button() == Qt::LeftButton) {
+        qDebug() << "Boton Izq (Principal)";
+        //modificamos el mov de caida libre que tiene, para subir
+        movimiento->setPosy(movimiento->getPosy()-10);
+        movimiento->setVel(60);
+        movimiento->setAng(0);
+        movimiento->CalcularVelocidad();
+        movimiento->CalcularPosicion();
+        ball->Mover(movimiento->getPosx(),movimiento->getPosy());
+    }
+    else if(event->button() == Qt::MiddleButton) {
+        qDebug() << "Boton del Medio (Centro)";
+    }
 }
 
 

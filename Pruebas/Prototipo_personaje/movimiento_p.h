@@ -5,7 +5,7 @@
 
 #define DT 0.05
 //#define DT 0.01 (con esto variamos la velocidad en la que se muestra la animación)
-#define g 9.8
+#define g -9.8
 
 
 class Movimiento_p
@@ -20,6 +20,9 @@ public:
     void CalcularPosicion();
     double getPosx() const;
     double getPosy() const;
+    void setPosy(double value);
+    void setVel(double value);
+    void setAng(double value);
 };
 
 #endif // MOVIMIENTO_P_H
