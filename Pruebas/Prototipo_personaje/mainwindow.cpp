@@ -9,35 +9,50 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     //creamos escena
+
     ui->setupUi(this);
-    scene= new QGraphicsScene();
+    scene = new QGraphicsScene(this);
+    setGeometry(0,0,1366,768);
+    ui->graphicsView->setGeometry(0,0,1366*100,768);
+    scene->setSceneRect(0,0,1366*100,768); //definimos el 0,0 de la escena
+    scene->setBackgroundBrush(QBrush(QImage(":/imagenes/HD-wallpaper-thousand-galaxies-galaxies-black-far-space.jpg")));
     ui->graphicsView->setScene(scene);
-    scene->setSceneRect(0,0,1480,670);
+    //ui->graphicsView->setFixedSize(500,280);
+    ;
+    //scene->setBackgroundBrush(QBrush(QImage(":/nave/imagenes/nebulosa.jpg")));
+
 
     //creamos personaje
     ball = new bolita(30,30,30);
-//    scene->addItem(ball);
+
 
 
     //Creamos paredes
-    paredes.push_back(new pared(0,0,1480,20));
+    /*paredes.push_back(new pared(0,0,1480,20));
     scene->addItem(paredes.back());
     paredes.push_back(new pared(0,330,1480,20));
     scene->addItem(paredes.back());
     paredes.push_back(new pared(0,0,20,660));
     scene->addItem(paredes.back());
     paredes.push_back(new pared(730,0,20,660));
-    scene->addItem(paredes.back());
+    scene->addItem(paredes.back());*/
 
     //Inicializamos la ec. de mov
-    double rad = (45*3.141598)/180;
-    movimiento = new Movimiento_p(30,30,60,rad);
+    //double rad = (45*3.141598)/180;
+    movimiento = new Movimiento_p(30,30,0,0);
     scene->addItem(ball);
-
+    ball->setFlag(QGraphicsItem::ItemIsFocusable);
+    ball->setFocus();
+    view= new QGraphicsView(this);
+    view->setScene(scene);
+    view->resize(1366,768);
+    this->resize(1366,768);
+    view->centerOn(ball->x(),ball->y());
     //timer para que vaya cayendo
     timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(Mover()));
-    timer->start(500);
+    //connect(timer,SIGNAL(timeout()),this,SLOT(movers(60,180)));
+    timer->start(100);
 
 
 
@@ -65,9 +80,12 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
         if(EvaluarColision()){
             std::cout<<"Prueba"<<std::endl;
            ball->MoveLeft();
+
+
         }
         else
            ball->MoveRight();
+
     }
     else if(evento->key()==Qt::Key_A)
      {
@@ -103,16 +121,15 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
 
 void MainWindow::Mover()
 {
-    //PRUEBAS
-//    ball->MoveRight();
-//    ball->MoveDown();
-//    qDebug() << "Verificando...\n";
-//    std::cout<<"Prueba"<<std::endl;
+
 
     movimiento->CalcularVelocidad();
     movimiento->CalcularPosicion();
     ball->Mover(movimiento->getPosx(),movimiento->getPosy());
+    ball->MoveRight();
+    view->centerOn(ball->x(),ball->y());
 }
+
 
 
 

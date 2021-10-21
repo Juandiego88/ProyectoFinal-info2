@@ -8,6 +8,7 @@
 #include <pared.h>
 #include <QList>
 #include <QTimer>
+#include <QGraphicsView>
 
 #include "bolita.h"
 #include "movimiento_p.h"
@@ -29,8 +30,10 @@ public:
 public slots:
     void Mover();
 
+
 private:
     QGraphicsScene *scene;
+    QGraphicsView *view;
     bolita *ball;
     QList<pared*>paredes;
     Ui::MainWindow *ui;
