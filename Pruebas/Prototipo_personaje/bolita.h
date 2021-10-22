@@ -27,6 +27,9 @@ public:
     void MoveDown();
     void Mover(int posx, int posy);
     int getposx();
+    int getPosx() const;
+    int getPosy() const;
+
 public slots:
 
 };

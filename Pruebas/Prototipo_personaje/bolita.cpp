@@ -1,5 +1,15 @@
 #include "bolita.h"
 
+int bolita::getPosx() const
+{
+    return posx;
+}
+
+int bolita::getPosy() const
+{
+    return posy;
+}
+
 bolita::bolita()
 {
 

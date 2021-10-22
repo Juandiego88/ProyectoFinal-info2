@@ -43,6 +43,18 @@ MainWindow::MainWindow(QWidget *parent)
     paredes.push_back(new pared(730,0,20,660));
     scene->addItem(paredes.back());*/
 
+    //agregamos monedas
+    for(int i=1; i<100; i++) {
+        coins1.push_back(new moneda(i*700,50,20));
+        scene->addItem(coins1.back());
+        coins1.push_back(new moneda(i*300,470,20));
+        scene->addItem(coins1.back());
+    }
+
+    //Agregamos balas
+    balas.push_back(new bala(0,0,20,20));
+    scene->addItem(balas.back());
+
     //Inicializamos la ec. de mov
     //double rad = (45*3.141598)/180;
     movimiento = new Movimiento_p(30,30,100,0);
@@ -89,8 +101,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     //connect(timer,SIGNAL(timeout()),this,SLOT(movers(60,180)));
-
-
 }
 
 MainWindow::~MainWindow()
@@ -187,6 +197,7 @@ void MainWindow::Movimiento()
 void MainWindow::mousePressEvent(QMouseEvent *event){
     if(event->button() == Qt::RightButton) {
     qDebug() << "Boton Der (Aux)";
+    balas.back()->mover();
     }
     else if(event->button() == Qt::LeftButton) {
         qDebug() << "Boton Izq (Principal)";

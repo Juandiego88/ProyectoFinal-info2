@@ -13,6 +13,8 @@
 
 #include "bolita.h"
 #include "movimiento_p.h"
+#include "bala.h"
+#include "moneda.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -46,6 +48,9 @@ private:
     Ui::MainWindow *ui;
     QTimer *timer;
     QTimer *timer1;
+    QList<moneda*> coins1;//monedas buenas
+    QList<moneda*> coins2;//monedas malas
+    QList<bala*> balas;
 
 
     Movimiento_p *movimiento;

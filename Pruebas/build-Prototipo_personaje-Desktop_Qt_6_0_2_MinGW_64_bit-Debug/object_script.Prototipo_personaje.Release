@@ -1,0 +1,11 @@
+release/bala.o
+release/bolita.o
+release/enemigo.o
+release/enemigo1.o
+release/main.o
+release/mainwindow.o
+release/moneda.o
+release/movimiento_p.o
+release/pared.o
+release/qrc_imagenes.o
+release/moc_mainwindow.o
