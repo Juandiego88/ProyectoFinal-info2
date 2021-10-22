@@ -27,7 +27,7 @@ void bolita::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QW
 //    painter->drawEllipse(boundingRect());
 
 //    Así le ponemos una imagen
-    QPixmap pxMap(":/nave/nave2.png"); //para la ruta le damos click izq a la imagen y copy path
+    QPixmap pxMap(":/nave.png"); //para la ruta le damos click izq a la imagen y copy path
     painter->drawPixmap(boundingRect(), pxMap, pxMap.rect());
 
 }
@@ -61,4 +61,11 @@ void bolita::Mover(int posx, int posy)
 {
     setPos(posx,posy);
 }
+
+int bolita::getposx()
+{
+    return posx;
+}
+
+
 

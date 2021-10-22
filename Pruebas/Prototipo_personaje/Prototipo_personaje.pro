@@ -10,6 +10,8 @@ CONFIG += c++11
 
 SOURCES += \
     bolita.cpp \
+    enemigo.cpp \
+    enemigo1.cpp \
     main.cpp \
     mainwindow.cpp \
     movimiento_p.cpp \
@@ -17,6 +19,8 @@ SOURCES += \
 
 HEADERS += \
     bolita.h \
+    enemigo.h \
+    enemigo1.h \
     mainwindow.h \
     movimiento_p.h \
     pared.h

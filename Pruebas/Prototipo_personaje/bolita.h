@@ -4,6 +4,8 @@
 #include <QPainter>
 #include <QPixmap>
 #include <math.h>
+#include <enemigo1.h>
+#include <QGraphicsScene>
 
 class bolita : public QGraphicsItem
 {
@@ -24,6 +26,9 @@ public:
     void MoveUp();
     void MoveDown();
     void Mover(int posx, int posy);
+    int getposx();
+public slots:
+
 };
 
 #endif // BOLITA_H

@@ -9,6 +9,7 @@
 #include <QList>
 #include <QTimer>
 #include <QGraphicsView>
+#include "enemigo.h"
 
 #include "bolita.h"
 #include "movimiento_p.h"
@@ -29,17 +30,27 @@ public:
 
 public slots:
     void Mover();
+    void Movimiento();
+
     void mousePressEvent(QMouseEvent *event);
+
 
 
 private:
     QGraphicsScene *scene;
     QGraphicsView *view;
     bolita *ball;
+
     QList<pared*>paredes;
+    QList<enemigo*>enemy;
     Ui::MainWindow *ui;
     QTimer *timer;
+    QTimer *timer1;
+
+
     Movimiento_p *movimiento;
     void keyPressEvent(QKeyEvent *evento);
+    bool aleatorio();
+    float p=0.5;
 };
 #endif // MAINWINDOW_H

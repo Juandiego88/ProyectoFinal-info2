@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <QDebug>
-
+#include <stdlib.h>
 #include <QMouseEvent>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     scene->setSceneRect(0,0,1366*100,768); //definimos el 0,0 de la escena
     scene->setBackgroundBrush(QBrush(QImage(":/imagenes/HD-wallpaper-thousand-galaxies-galaxies-black-far-space.jpg")));
     ui->graphicsView->setScene(scene);
+
     //ui->graphicsView->setFixedSize(500,280);
     ;
     //scene->setBackgroundBrush(QBrush(QImage(":/nave/imagenes/nebulosa.jpg")));
@@ -26,6 +27,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     //creamos personaje
     ball = new bolita(30,30,30);
+    //enemy = new enemigo1();
+
+
 
 
 
@@ -41,8 +45,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     //Inicializamos la ec. de mov
     //double rad = (45*3.141598)/180;
-    movimiento = new Movimiento_p(30,30,60,0);
+    movimiento = new Movimiento_p(30,30,100,0);
     scene->addItem(ball);
+    //scene->addItem(enemy);
     ball->setFlag(QGraphicsItem::ItemIsFocusable);
     ball->setFocus();
     view= new QGraphicsView(this);
@@ -52,9 +57,40 @@ MainWindow::MainWindow(QWidget *parent)
     view->centerOn(ball->x(),ball->y());
     //timer para que vaya cayendo
     timer = new QTimer(this);
+    timer->start(50);
     connect(timer,SIGNAL(timeout()),this,SLOT(Mover()));
+
+    /*enemy.append(new enemigo(900,30,200));
+    scene->addItem(enemy.back());
+    timer1 = new QTimer(this);
+    timer1->start(50);
+    connect(timer1,SIGNAL(timeout()),this,SLOT(Movimiento()));*/
+    srand(time(NULL));
+    for(int i=0;i<200;i++){
+        if(aleatorio()){
+
+            int random_numberx = rand() % (136600-2000);
+            int random_numbery = rand() % 600;
+            enemy.append((new enemigo(random_numberx,random_numbery,100)));
+                        }
+     }
+
+
+    for(int j=0;j<enemy.size();j++){
+                scene->addItem(enemy.at(j));
+                /*timer1 = new QTimer(this);
+                timer1->start(50);
+                connect(timer1,SIGNAL(timeout()),this,SLOT(Movimiento()));*/
+    }
+    timer1 = new QTimer(this);
+    timer1->start(50);
+    connect(timer1,SIGNAL(timeout()),this,SLOT(Movimiento()));
+
+
+
     //connect(timer,SIGNAL(timeout()),this,SLOT(movers(60,180)));
-    timer->start(100);
+
+
 }
 
 MainWindow::~MainWindow()
@@ -118,14 +154,35 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
 
 }
 
+bool MainWindow::aleatorio()
+{
+    int n, x;
+    n=rand();
+    x=p*(RAND_MAX+1)-1;
+    return n<=x;
+
+}
+
 void MainWindow::Mover()
 {
     movimiento->CalcularVelocidad();
     movimiento->CalcularPosicion();
     ball->Mover(movimiento->getPosx(),movimiento->getPosy());
+
 //    ball->MoveRight();
     view->centerOn(ball->x(),ball->y());
+
 }
+
+void MainWindow::Movimiento()
+{
+    for(int j=0;j<enemy.length();j++){
+             enemy.at(j)->movimiento();
+
+        }
+}
+
+
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
     if(event->button() == Qt::RightButton) {
@@ -135,7 +192,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event){
         qDebug() << "Boton Izq (Principal)";
         //modificamos el mov de caida libre que tiene, para subir
         movimiento->setPosy(movimiento->getPosy()-10);
-        movimiento->setVel(60);
+        movimiento->setVel(100);
         movimiento->setAng(0);
         movimiento->CalcularVelocidad();
         movimiento->CalcularPosicion();
@@ -145,6 +202,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event){
         qDebug() << "Boton del Medio (Centro)";
     }
 }
+
 
 
 

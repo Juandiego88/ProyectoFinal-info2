@@ -1,9 +1,7 @@
 <RCC>
-    <qresource prefix="/nave">
-        <file>nave.png</file>
-        <file>nave2.png</file>
-    </qresource>
     <qresource prefix="/">
+        <file>enemigo.png</file>
+        <file>nave.png</file>
         <file>imagenes/HD-wallpaper-thousand-galaxies-galaxies-black-far-space.jpg</file>
     </qresource>
 </RCC>
