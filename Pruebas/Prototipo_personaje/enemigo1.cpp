@@ -1,56 +1,28 @@
 #include "enemigo1.h"
 #include <stdlib.h>
 
-enemigo1::enemigo1(double pox, double poy, double vx, double vy)
+
+
+enemigo1::enemigo1()
 {
-    posx=pox;
-    posy=poy;
-    velx=vx;
-    vely=vy;
-}
-
-enemigo1::enemigo1(QGraphicsItem * parent): QObject(), QGraphicsPixmapItem()
-{
-    /*int random_number = rand() % 600;
-    setPos(900,random_number);
-    //(900,30);*/
-
-
-    setPixmap(QPixmap(":/enemigo.png").scaled(200,200));
-
-    //connect
-    /*QTimer * timer2 = new QTimer(this);
-    connect(timer2,SIGNAL(timeout()),this, SLOT(move()));
-
-    timer2->start(50);*/
-}
-
-double enemigo1::getPosx() const
-{
-    return posx;
-}
-
-void enemigo1::setPosx(double value)
-{
-    posx=value;
 
 }
 
-double enemigo1::getPosy() const
+enemigo1::enemigo1(float posmx, float posmy, int tam1)
 {
-    return posy;
-
+    tam=tam1;
+    auxx1=posmx;
+    auxy1=posmy;
+    setPixmap(QPixmap(":/enemy1.png").scaled(tam,tam));
+    setPos(auxx1,auxy1);
 }
 
-void enemigo1::setPosy(double value)
+void enemigo1::movimiento1()
 {
-    posy=value;
-}
+    x1=auxx1-(v*t);
+    y1=auxy1;
+    v=v+4;
 
-void enemigo1::move(double x , double y)
-{
-    posx=x;
-    posy=y;
-    this->posx-=velx;
-    setPos(posx,posy);
+    setPos(x1,y1);
+
 }

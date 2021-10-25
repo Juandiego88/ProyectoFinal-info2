@@ -33,6 +33,7 @@ public:
 public slots:
     void Mover();
     void Movimiento();
+    void Movimiento1();
 
     void mousePressEvent(QMouseEvent *event);
 
@@ -45,9 +46,11 @@ private:
 
     QList<pared*>paredes;
     QList<enemigo*>enemy;
+    QList<enemigo1*>enemy1;
     Ui::MainWindow *ui;
     QTimer *timer;
     QTimer *timer1;
+    QTimer *timer2;
     QList<moneda*> coins1;//monedas buenas
     QList<moneda*> coins2;//monedas malas
     QList<Bullet*> bullets;
@@ -57,5 +60,7 @@ private:
     void keyPressEvent(QKeyEvent *evento);
     bool aleatorio();
     float p=0.5;
+    double ancho=1366;
+     double largo=700;
 };
 #endif // MAINWINDOW_H

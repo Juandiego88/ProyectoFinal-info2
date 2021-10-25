@@ -5,22 +5,19 @@
 #include <QTimer>
 
 
-class enemigo1: public QObject, public QGraphicsPixmapItem
+
+
+
+class enemigo1:public QObject, public QGraphicsPixmapItem
 {
 public:
-    enemigo1(double pox,double poy,double vx, double vy);
-    enemigo1(QGraphicsItem * parent=0);
-    double getPosx() const;
-    void setPosx(double value);
-    double getPosy() const;
-    void setPosy(double value);
+    enemigo1();
+    enemigo1(float posmx, float posmy,int tam);
+    void movimiento1();
 private:
-    double posx=0;
-    double posy=0;
-    double velx=0;
-    double vely=0;
-public slots:
-    void move(double x, double y);
+    int tam=0;
+    float x1=0,y1=0,auxx1=0,auxy1=0,r=50, v=5, t=2;
 };
+
 
 #endif // ENEMIGO1_H
