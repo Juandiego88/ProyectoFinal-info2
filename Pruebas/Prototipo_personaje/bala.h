@@ -3,7 +3,7 @@
 #include <QGraphicsItem>
 #include <QPainter>
 
-class bala : public QGraphicsItem
+class bala : public QGraphicsItem, public QObject
 {
 private:
     int posx;
@@ -18,6 +18,8 @@ public:
     QRectF boundingRect() const ;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                QWidget *widget = nullptr);
+public slots:
+    void move();
 };
 
 #endif // BALA_H

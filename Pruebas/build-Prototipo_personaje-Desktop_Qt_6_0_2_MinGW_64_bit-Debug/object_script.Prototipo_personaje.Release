@@ -1,5 +1,5 @@
-release/bala.o
 release/bolita.o
+release/bullet.o
 release/enemigo.o
 release/enemigo1.o
 release/main.o
@@ -8,4 +8,5 @@ release/moneda.o
 release/movimiento_p.o
 release/pared.o
 release/qrc_imagenes.o
+release/moc_bullet.o
 release/moc_mainwindow.o

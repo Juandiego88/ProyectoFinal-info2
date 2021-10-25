@@ -1,4 +1,9 @@
 #include "bala.h"
+#include <QGraphicsScene>
+#include <QGraphicsItem>
+#include <QTimer>
+#include <QObject>
+#include <QDebug>
 
 bala::bala()
 {
@@ -11,13 +16,18 @@ bala::bala(int x, int y, int w, int h)
    this->posy=y;
    this->w=w;
    this->h=h;
-    setPos(posx,posy);
+   setPos(posx,posy);
+   //connect
+   QTimer *timer = new QTimer();
+   connect(timer,SIGNAL(timeout()),this, SLOT(mover()));
+   timer->start(100);
 }
 
 void bala::mover()
 {
     this->posx+=10;
     setPos(posx,posy);
+    qDebug() << "Prueba\n";
 }
 
 QRectF bala::boundingRect() const

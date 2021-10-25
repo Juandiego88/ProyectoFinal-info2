@@ -51,10 +51,6 @@ MainWindow::MainWindow(QWidget *parent)
         scene->addItem(coins1.back());
     }
 
-    //Agregamos balas
-    balas.push_back(new bala(0,0,20,20));
-    scene->addItem(balas.back());
-
     //Inicializamos la ec. de mov
     //double rad = (45*3.141598)/180;
     movimiento = new Movimiento_p(30,30,100,0);
@@ -197,7 +193,9 @@ void MainWindow::Movimiento()
 void MainWindow::mousePressEvent(QMouseEvent *event){
     if(event->button() == Qt::RightButton) {
     qDebug() << "Boton Der (Aux)";
-    balas.back()->mover();
+    bullets.push_back(new Bullet());
+    bullets.back()->setPos((movimiento->getPosx()+35),(movimiento->getPosy()-8));
+    scene->addItem(bullets.back());
     }
     else if(event->button() == Qt::LeftButton) {
         qDebug() << "Boton Izq (Principal)";

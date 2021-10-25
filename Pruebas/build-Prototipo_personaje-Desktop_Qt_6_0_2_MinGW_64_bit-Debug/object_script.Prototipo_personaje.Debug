@@ -1,5 +1,5 @@
-debug/bala.o
 debug/bolita.o
+debug/bullet.o
 debug/enemigo.o
 debug/enemigo1.o
 debug/main.o
@@ -8,4 +8,5 @@ debug/moneda.o
 debug/movimiento_p.o
 debug/pared.o
 debug/qrc_imagenes.o
+debug/moc_bullet.o
 debug/moc_mainwindow.o

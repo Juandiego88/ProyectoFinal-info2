@@ -9,8 +9,8 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    bala.cpp \
     bolita.cpp \
+    bullet.cpp \
     enemigo.cpp \
     enemigo1.cpp \
     main.cpp \
@@ -20,8 +20,8 @@ SOURCES += \
     pared.cpp
 
 HEADERS += \
-    bala.h \
     bolita.h \
+    bullet.h \
     enemigo.h \
     enemigo1.h \
     mainwindow.h \
