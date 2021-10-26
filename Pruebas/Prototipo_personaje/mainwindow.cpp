@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <QDebug>
+#include <QLabel>
 #include <stdlib.h>
 #include <QMouseEvent>
 int score=0;
@@ -121,6 +122,26 @@ MainWindow::MainWindow(QWidget *parent)
         timer2 = new QTimer(this);
         timer2->start(50);
         connect(timer2,SIGNAL(timeout()),this,SLOT(Movimiento1()));
+
+        //Agregamos segunda ventana para el puntaje
+        w2 =  new QMainWindow(this);
+        scene2 = new QGraphicsScene();
+
+        v2 = new QGraphicsView(scene2, w2);
+        v2->setGeometry(0,0,400,400);
+
+        ui->graphicsView->setScene(scene2);
+        w2->setGeometry(1200,50,150,50);
+
+        QLabel *label = new QLabel(this);
+        label->setText("Puntuacion: ");
+//        setBaseSize(QSize(600, 400));
+//        label->resize(label->baseSize());
+//        label->setScaledContents(true);
+        scene2->addWidget(label);
+        ui->graphicsView->setScene(scene2);
+
+        w2->show();
 
 
 

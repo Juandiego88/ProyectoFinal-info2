@@ -2,15 +2,14 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <bolita.h>
 #include <QGraphicsScene>
 #include <QKeyEvent>
 #include <pared.h>
 #include <QList>
 #include <QTimer>
 #include <QGraphicsView>
-#include "enemigo.h"
 
+#include "enemigo.h"
 #include "bolita.h"
 #include "movimiento_p.h"
 #include "moneda.h"
@@ -40,8 +39,9 @@ public slots:
 
 
 private:
-    QGraphicsScene *scene;
-    QGraphicsView *view;
+    QGraphicsScene *scene, *scene2;
+    QGraphicsView *view, *v2;
+    QMainWindow *w2;
     bolita *ball;
 
     QList<pared*>paredes;
@@ -61,6 +61,6 @@ private:
     bool aleatorio();
     float p=0.5;
     double ancho=1366;
-     double largo=700;
+    double largo=700;
 };
 #endif // MAINWINDOW_H
