@@ -58,8 +58,8 @@ private:
 
     Movimiento_p *movimiento;
     void keyPressEvent(QKeyEvent *evento);
-    bool aleatorio();
-    float p=0.5;
+    bool aleatorio(float p);
+
     double ancho=1366;
     double largo=700;
 };

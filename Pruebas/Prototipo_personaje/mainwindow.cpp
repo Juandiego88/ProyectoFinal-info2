@@ -81,11 +81,11 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timer1,SIGNAL(timeout()),this,SLOT(Movimiento()));*/
     srand(time(NULL));
     for(int i=0;i<200;i++){
-        if(aleatorio()){
+        if(aleatorio(0.6)){
 
-            int random_numberx = rand() % (100000+2000);
+            int random_numberx = rand() % 99200+800;
             int random_numbery = rand() % 500;
-            enemy.append((new enemigo(random_numberx,random_numbery,100)));
+            enemy.append((new enemigo(random_numberx,random_numbery,100,1)));
                         }
      }
 
@@ -103,11 +103,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     srand(time(NULL));
     for(int i1=0;i1<200;i1++){
-        if(aleatorio()){
+        if(aleatorio(0.7)){
 
-            float random_numberx1 = rand() % (100000+500000);
+            float random_numberx1 = rand() % 80000+20000;
             float random_numbery1 = rand() % 500;
-            enemy1.append((new enemigo1(random_numberx1,random_numbery1,60)));
+            enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,4)));
                         }
      }
 
@@ -213,7 +213,7 @@ void MainWindow::keyPressEvent(QKeyEvent *evento)
 
 }
 
-bool MainWindow::aleatorio()
+bool MainWindow::aleatorio(float p)
 {
     int n, x;
     n=rand();
@@ -230,6 +230,8 @@ void MainWindow::Mover()
 
 //    ball->MoveRight();
     view->centerOn(ball->x(),ball->y());
+    score++;
+    qDebug()<<score;
 
 }
 
