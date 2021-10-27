@@ -6,5 +6,6 @@
         <file>imagenes/agujero.png</file>
         <file>imagenes/bala.png</file>
         <file>enemy1.png</file>
+        <file>imagenes/fondo.jpg</file>
     </qresource>
 </RCC>

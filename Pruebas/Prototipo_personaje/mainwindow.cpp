@@ -4,7 +4,7 @@
 #include <iostream>
 #include <QDebug>
 #include <QLabel>
-#include <stdlib.h>
+//#include <stdlib.h>
 #include <QMouseEvent>
 int score=0;
 
@@ -19,10 +19,11 @@ MainWindow::MainWindow(QWidget *parent)
     scene = new QGraphicsScene(this);
     setGeometry(0,0,ancho,largo);
     ui->graphicsView->setGeometry(0,0,ancho*100,largo);
-    scene->setSceneRect(0,0,ancho*100,largo);
+    scene->setSceneRect(0,0,ancho*50,largo);
     /*setGeometry(0,0,1366,768);
     ui->graphicsView->setGeometry(0,0,1366*100,768);
     scene->setSceneRect(0,0,1366*100,768); *///definimos el 0,0 de la escena
+    //scene->setBackgroundBrush(QBrush(QImage(":/imagenes/fondo.jpg")));
     scene->setBackgroundBrush(QBrush(QImage(":/imagenes/HD-wallpaper-thousand-galaxies-galaxies-black-far-space.jpg")));
     ui->graphicsView->setScene(scene);
 
@@ -80,15 +81,48 @@ MainWindow::MainWindow(QWidget *parent)
     timer1->start(50);
     connect(timer1,SIGNAL(timeout()),this,SLOT(Movimiento()));*/
     srand(time(NULL));
-    for(int i=0;i<200;i++){
-        if(aleatorio(0.6)){
+    for(int i=0;i<100;i++){
+        if(aleatorio(0.5)){
 
-            int random_numberx = rand() % 99200+800;
+            //int random_numberx = rand() % 99200+800;
+            int random_numberx = rand() % 9000+1000;
             int random_numbery = rand() % 500;
             enemy.append((new enemigo(random_numberx,random_numbery,100,1)));
                         }
      }
 
+    for(int i=0;i<200;i++){
+        if(aleatorio(0.6)){
+
+            int random_numberx = rand() % 10000+10000;
+            int random_numbery = rand() % 500;
+            enemy.append((new enemigo(random_numberx,random_numbery,100,2)));
+                        }
+     }
+    for(int i=0;i<300;i++){
+        if(aleatorio(0.7)){
+
+            int random_numberx = rand() % 10000+20000;
+            int random_numbery = rand() % 500;
+            enemy.append((new enemigo(random_numberx,random_numbery,100,3)));
+                        }
+     }
+    for(int i=0;i<500;i++){
+        if(aleatorio(0.8)){
+
+            int random_numberx = rand() % 30000+30000;
+            int random_numbery = rand() % 500;
+            enemy.append((new enemigo(random_numberx,random_numbery,100,4)));
+                        }
+     }
+    for(int i=0;i<800;i++){
+        if(aleatorio(0.9)){
+
+            int random_numberx = rand() % 40000+60000;
+            int random_numbery = rand() % 500;
+            enemy.append((new enemigo(random_numberx,random_numbery,100,5)));
+                        }
+     }
 
     for(int j=0;j<enemy.size();j++){
                 scene->addItem(enemy.at(j));
@@ -102,14 +136,52 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     srand(time(NULL));
+    for(int i1=0;i1<100;i1++){
+        if(aleatorio(0.5)){
+
+            float random_numberx1 = rand() % 80000+20000;
+            float random_numbery1 = rand() % 500;
+            enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,2)));
+                        }
+     }
+
+    for(int i1=0;i1<150;i1++){
+        if(aleatorio(0.6)){
+
+            float random_numberx1 = rand() % 80000+40000;
+            float random_numbery1 = rand() % 500;
+            enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,2.5)));
+                        }
+     }
+
     for(int i1=0;i1<200;i1++){
         if(aleatorio(0.7)){
 
-            float random_numberx1 = rand() % 80000+20000;
+            float random_numberx1 = rand() % 80000+60000;
+            float random_numbery1 = rand() % 500;
+            enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,3)));
+                        }
+     }
+
+    for(int i1=0;i1<300;i1++){
+        if(aleatorio(0.8)){
+
+            float random_numberx1 = rand() % 80000+80000;
+            float random_numbery1 = rand() % 500;
+            enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,3.5)));
+                        }
+     }
+    for(int i1=0;i1<1000;i1++){
+        if(aleatorio(0.8)){
+
+            float random_numberx1 = rand() % 160000+160000;
             float random_numbery1 = rand() % 500;
             enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,4)));
                         }
      }
+
+
+
 
 
     for(int j1=0;j1<enemy1.size();j1++){
