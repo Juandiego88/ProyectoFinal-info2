@@ -15,6 +15,7 @@ SOURCES += \
     enemigo1.cpp \
     main.cpp \
     mainwindow.cpp \
+    menu.cpp \
     moneda.cpp \
     movimiento_p.cpp \
     pared.cpp
@@ -25,12 +26,14 @@ HEADERS += \
     enemigo.h \
     enemigo1.h \
     mainwindow.h \
+    menu.h \
     moneda.h \
     movimiento_p.h \
     pared.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    menu.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

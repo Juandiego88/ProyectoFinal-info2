@@ -7,5 +7,7 @@
         <file>imagenes/bala.png</file>
         <file>enemy1.png</file>
         <file>imagenes/fondo.jpg</file>
+        <file>nave2.png</file>
+        <file>nave1.png</file>
     </qresource>
 </RCC>

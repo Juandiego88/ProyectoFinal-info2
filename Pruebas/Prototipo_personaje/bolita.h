@@ -4,10 +4,12 @@
 #include <QPainter>
 #include <QPixmap>
 #include <math.h>
+#include <QObject>
+#include <QGraphicsPixmapItem>
 #include <enemigo1.h>
 #include <QGraphicsScene>
 
-class bolita : public QGraphicsItem
+class bolita : QObject, public QGraphicsPixmapItem
 {
 
     int posx;
@@ -18,9 +20,7 @@ class bolita : public QGraphicsItem
 public:
     bolita();
     bolita(int x, int y , int r);
-    QRectF boundingRect() const ;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
-               QWidget *widget = nullptr);
+
     void MoveRight();
     void MoveLeft();
     void MoveUp();

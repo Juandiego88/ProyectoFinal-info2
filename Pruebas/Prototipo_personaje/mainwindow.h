@@ -28,6 +28,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     bool EvaluarColision();
+    int getmulti();
+    void setmulti(int band);
+    int numero=0;
 
 public slots:
     void Mover();
@@ -54,12 +57,13 @@ private:
     QList<moneda*> coins1;//monedas buenas
     QList<moneda*> coins2;//monedas malas
     QList<Bullet*> bullets;
+    QString nave[2];
 
 
     Movimiento_p *movimiento;
     void keyPressEvent(QKeyEvent *evento);
     bool aleatorio(float p);
-
+    int bandera=0;
     double ancho=1366;
     double largo=700;
 };
