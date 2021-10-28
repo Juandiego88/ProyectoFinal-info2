@@ -5,20 +5,17 @@
 
 Bullet::Bullet(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem()
 {
-    //draw the bullet
+    //Asignamos la imagen a la bala
     setPixmap(QPixmap(":/imagenes/bala.png").scaled(40,20));
 
-
-    //connect
+    //Creamos timer para que se vaya moviendo
     QTimer * timer = new QTimer();
     connect(timer,SIGNAL(timeout()),this, SLOT(move()));
-
     timer->start(50);
-
 }
 
 void Bullet::move()
 {
-    //move bullet up
+    //movemos la bala en el eje x
     setPos(x()+15,y());
 }

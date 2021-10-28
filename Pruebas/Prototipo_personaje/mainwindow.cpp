@@ -13,13 +13,12 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-
-        //creamos escena
         nave[0]=":/nave3.png";
         nave[1]=":/nave3.png";
 //        nave[0]=":/nave1.png";
 //        nave[1]=":/nave2.png";
 
+        //creamos escena
         ui->setupUi(this);
         scene = new QGraphicsScene(this);
         setGeometry(0,0,ancho,largo);
@@ -28,15 +27,14 @@ MainWindow::MainWindow(QWidget *parent)
         scene->setBackgroundBrush(QBrush(QImage(":/imagenes/HD-wallpaper-thousand-galaxies-galaxies-black-far-space.jpg")));
         ui->graphicsView->setScene(scene);
 
-        //creamos personaje
+        //creamos personaje [nave espacial - jugador]
         ball = new bolita(30,80,40);
 
-        //Creamos paredes (arriba y abajo)
+        //Creamos paredes (arriba y abajo para que la nave no pueda salir)
         paredes.push_back(new pared(0,0,1480*100,60));
         scene->addItem(paredes.back());
         paredes.push_back(new pared(0,330,1480*100,50));
         scene->addItem(paredes.back());
-
 
         //agregamos monedas
         srand(time(NULL));
@@ -46,9 +44,11 @@ MainWindow::MainWindow(QWidget *parent)
              scene->addItem(coins1.back());
          }
 
-        //Inicializamos la ec. de mov
+        //Inicializamos la ec. de mov parabolico
         movimiento = new Movimiento_p(30,80,100,0);
         scene->addItem(ball);
+
+        //centramos la escena siempre al personaje principal
         ball->setFlag(QGraphicsItem::ItemIsFocusable);
         ball->setFocus();
         view= new QGraphicsView(this);
@@ -57,24 +57,24 @@ MainWindow::MainWindow(QWidget *parent)
         this->resize(ancho,largo);
         view->centerOn(ball->x(),ball->y());
 
-        //timer para que vaya cayendo
+        //timer para que vaya cayendo la nave principal
         timer = new QTimer(this);
         timer->start(50);
         connect(timer,SIGNAL(timeout()),this,SLOT(Mover()));
 
-        //creamos los enemigos
+        /*creamos los enemigos (se hacen diferentes ciclos ya que en cada uno se hace uso de diferentes
+       condiciones, por lo tanto es mas facil tener varios for */
         srand(time(NULL));
         for(int i=0;i<100;i++){
             if(aleatorio(0.5)){
                 int random_numberx = rand() % 9000+1000;
                 int random_numbery = rand() % 500;
                 enemy.append((new enemigo(random_numberx,random_numbery,100,1)));
-                            }
+            }
          }
 
         for(int i=0;i<200;i++){
             if(aleatorio(0.6)){
-
                 int random_numberx = rand() % 10000+10000;
                 int random_numbery = rand() % 500;
                 enemy.append((new enemigo(random_numberx,random_numbery,100,2)));
@@ -82,7 +82,6 @@ MainWindow::MainWindow(QWidget *parent)
          }
         for(int i=0;i<300;i++){
             if(aleatorio(0.7)){
-
                 int random_numberx = rand() % 10000+20000;
                 int random_numbery = rand() % 500;
                 enemy.append((new enemigo(random_numberx,random_numbery,100,3)));
@@ -90,7 +89,6 @@ MainWindow::MainWindow(QWidget *parent)
          }
         for(int i=0;i<500;i++){
             if(aleatorio(0.8)){
-
                 int random_numberx = rand() % 30000+30000;
                 int random_numbery = rand() % 500;
                 enemy.append((new enemigo(random_numberx,random_numbery,100,4)));
@@ -98,7 +96,6 @@ MainWindow::MainWindow(QWidget *parent)
          }
         for(int i=0;i<800;i++){
             if(aleatorio(0.9)){
-
                 int random_numberx = rand() % 40000+60000;
                 int random_numbery = rand() % 500;
                 enemy.append((new enemigo(random_numberx,random_numbery,100,5)));
@@ -108,11 +105,15 @@ MainWindow::MainWindow(QWidget *parent)
         for(int j=0;j<enemy.size();j++){
                     scene->addItem(enemy.at(j));
         }
+
+        //timer para mover a los enemigos en todo momento
         timer1 = new QTimer(this);
         timer1->start(50);
         connect(timer1,SIGNAL(timeout()),this,SLOT(Movimiento()));
 
 
+        //agregamos 2do tipo de enemigo [los cuales salen cuando se haya avanzado un tiempo determinado]
+        //Nuevamente se crean en varios ciclos individuales ya que todos cuentan con sus propias condiciones
         srand(time(NULL));
         for(int i1=0;i1<100;i1++){
             if(aleatorio(0.5)){
@@ -120,7 +121,7 @@ MainWindow::MainWindow(QWidget *parent)
                 float random_numbery1 = rand() % 500;
                                                //coeficiente de friccion: 0.5 - velocidad: 4
                 enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,(0.5*4))));
-                            }
+            }
          }
 
         for(int i1=0;i1<150;i1++){
@@ -129,7 +130,7 @@ MainWindow::MainWindow(QWidget *parent)
                 float random_numbery1 = rand() % 500;
                                               //coeficiente de friccion: 0.65 - velocidad: 4
                 enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,0.65*4)));
-                            }
+            }
          }
 
         for(int i1=0;i1<200;i1++){
@@ -138,7 +139,7 @@ MainWindow::MainWindow(QWidget *parent)
                 float random_numbery1 = rand() % 500;
                                                //coeficiente de friccion: 0.75 - velocidad: 4
                 enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,(0.75*4))));
-                            }
+            }
          }
 
         for(int i1=0;i1<300;i1++){
@@ -147,39 +148,41 @@ MainWindow::MainWindow(QWidget *parent)
                 float random_numbery1 = rand() % 500;
                                                //coeficiente de friccion: 0.875 - velocidad: 4
                 enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,(0.875*4))));
-                            }
+            }
          }
         for(int i1=0;i1<1000;i1++){
             if(aleatorio(0.8)){
                 float random_numberx1 = rand() % 160000+160000;
                 float random_numbery1 = rand() % 500;
                 enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,4)));
-                }
+            }
          }
 
         for(int j1=0;j1<enemy1.size();j1++){
                     scene->addItem(enemy1.at(j1));
         }
 
-            timer2 = new QTimer(this);
-            timer2->start(50);
-            connect(timer2,SIGNAL(timeout()),this,SLOT(Movimiento1()));
+        //timer para mover los 2dos enemigos [tipo platillo]
+        timer2 = new QTimer(this);
+        timer2->start(50);
+        connect(timer2,SIGNAL(timeout()),this,SLOT(Movimiento1()));
 
-            //Agregamos segunda ventana para el puntaje [esto hay que dejarlo]
-            w2 =  new QMainWindow(this);
-            scene2 = new QGraphicsScene();
-            v2 = new QGraphicsView(scene2, w2);
-            v2->setGeometry(0,0,400,400);
-            ui->graphicsView->setScene(scene2);
-            w2->setGeometry(1200,50,150,50);
-//            w2->show();
+        //Agregamos segunda ventana para el puntaje [esto hay que dejarlo]
+        w2 =  new QMainWindow(this);
+        scene2 = new QGraphicsScene();
+        v2 = new QGraphicsView(scene2, w2);
+        v2->setGeometry(0,0,400,400);
+        ui->graphicsView->setScene(scene2);
+        w2->setGeometry(1200,50,150,50);
+//      w2->show();
 
-            //vamos a poner el score
-            puntos = new class score();
-            scene->addItem(puntos);
-
-            balas = new class score2();
-            scene->addItem(balas);
+        //vamos a poner el score
+        //puntos
+        puntos = new class score();
+        scene->addItem(puntos);
+        //balas
+        balas = new class score2();
+        scene->addItem(balas);
 }
 
 MainWindow::~MainWindow()
@@ -216,7 +219,7 @@ bool MainWindow::ComerMoneda()//recorremos toda la lista de monedas y vamos elim
     return false;
 }
 
-bool MainWindow::ExplotarBalas()//recorremos toda la lista de monedas y vamos eliminando las que chocamos
+bool MainWindow::ExplotarBalas()//recorremos toda la lista de enemigos y vamos eliminando los que chocamos
 {
     QList<enemigo*>::iterator it;
     QList<enemigo1*>::iterator itr;
@@ -248,7 +251,7 @@ bool MainWindow::ExplotarBalas()//recorremos toda la lista de monedas y vamos el
     return false;
 }
 
-bool MainWindow::Morir() //Evaluamos cuando la nave choca con algun enemigo
+bool MainWindow::Morir() //Evaluamos cuando la nave choca con algun enemigo o pared
 {
     QList<enemigo*>::iterator it;
     for(it=enemy.begin();it!=enemy.end();it++) {
@@ -280,7 +283,7 @@ bool MainWindow::Morir() //Evaluamos cuando la nave choca con algun enemigo
     return false;
 }
 
-bool MainWindow::aleatorio(float p)
+bool MainWindow::aleatorio(float p) //función para generar probabilidades aleatorias
 {
     int n, x;
     n=rand();
@@ -289,7 +292,7 @@ bool MainWindow::aleatorio(float p)
 
 }
 
-int MainWindow::getmulti()
+int MainWindow::getmulti() //función para el multijugador
 {
     return bandera;
 }
@@ -300,7 +303,8 @@ void MainWindow::setmulti(int band)
 }
 
 
-void MainWindow::Mover()
+void MainWindow::Mover() /*función que se ejecuta en todo momento, se calcula el movimiento parabolico de la nave
+y adicionalmente se hacen comprobaciones como evaluar colisiones, etc*/
 {
     //mov. parabolico (en caida de la nave)
     movimiento->CalcularVelocidad();
@@ -329,19 +333,19 @@ void MainWindow::Movimiento() //mov enemigo verde
     }
 }
 
-void MainWindow::Movimiento1()
+void MainWindow::Movimiento1() //mov enemigo plateado [platillos]
 {
     for(int j=0;j<enemy1.length();j++){
              enemy1.at(j)->movimiento1();
     }
 }
 
-void MainWindow::mousePressEvent(QMouseEvent *event){
+void MainWindow::mousePressEvent(QMouseEvent *event){ //Detectar clicks del mouse [los 3 botones
     if(event->button() == Qt::RightButton) {
         if(balas->getBalas()>0) {
             qDebug() << "Boton Der (Aux)";
             bullets.push_back(new Bullet());
-            bullets.back()->setPos((movimiento->getPosx()+60),(movimiento->getPosy()+28));
+            bullets.back()->setPos((movimiento->getPosx()+60),(movimiento->getPosy()+27));
             scene->addItem(bullets.back());
             balas->setBalas(balas->getBalas()-1);
         }

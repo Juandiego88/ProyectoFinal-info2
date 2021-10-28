@@ -150,10 +150,12 @@ release/qrc_imagenes.cpp: ../Prototipo_personaje/imagenes.qrc \
 		C:/Qt/6.0.2/mingw81_64/bin/rcc.exe \
 		../Prototipo_personaje/enemigo.png \
 		../Prototipo_personaje/nave3.png \
-		../Prototipo_personaje/nave2.png \
 		../Prototipo_personaje/enemy1.png \
+		../Prototipo_personaje/nave5.png \
+		../Prototipo_personaje/nave2.png \
 		../Prototipo_personaje/nave.png \
 		../Prototipo_personaje/nave1.png \
+		../Prototipo_personaje/nave4.png \
 		../Prototipo_personaje/imagenes/agujero.png \
 		../Prototipo_personaje/imagenes/HD-wallpaper-thousand-galaxies-galaxies-black-far-space.jpg \
 		../Prototipo_personaje/imagenes/bala.png \

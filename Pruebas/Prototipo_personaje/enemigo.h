@@ -10,13 +10,18 @@
 
 class enemigo:public QObject, public QGraphicsPixmapItem
 {
+private:
+    //atributos de posición
+    int size=0;
+    float x=0, y=0, auxx=0, auxy=0, r=65, the=0, v=0;
+
 public:
+    //constructores
     enemigo();
     enemigo(float posmx, float posmy,int tam,int vel);
+
+    //funciones de movimiento
     void movimiento();
-private:
-    int size=0;
-    float x=0,y=0,auxx=0,auxy=0,r=65,the=0,v=0;
 };
 
 #endif // ENEMIGO_H
