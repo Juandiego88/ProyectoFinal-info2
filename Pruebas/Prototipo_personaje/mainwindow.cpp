@@ -6,6 +6,7 @@
 //#include <stdlib.h>
 #include <QMouseEvent>
 int score=0;
+int no_balas=0;
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -35,30 +36,26 @@ MainWindow::MainWindow(QWidget *parent)
 
 
         //creamos personaje
-        ball = new bolita(30,30,30);
+        ball = new bolita(30,80,30);
         //enemy = new enemigo1();
 
-        //Creamos paredes
-        /*paredes.push_back(new pared(0,0,1480,20));
+        //Creamos paredes (arriba y abajo)
+        paredes.push_back(new pared(0,0,1480*100,60));
         scene->addItem(paredes.back());
-        paredes.push_back(new pared(0,330,1480,20));
+        paredes.push_back(new pared(0,330,1480*100,50));
         scene->addItem(paredes.back());
-        paredes.push_back(new pared(0,0,20,660));
-        scene->addItem(paredes.back());
-        paredes.push_back(new pared(730,0,20,660));
-        scene->addItem(paredes.back());*/
+
 
         //agregamos monedas
-        for(int i=1; i<100; i++) {
-            coins1.push_back(new moneda(i*700,50,20));
+        for(int i=1; i<=100; i++) {
+            coins1.push_back(new moneda(i*700,80,20));
             scene->addItem(coins1.back());
-            coins1.push_back(new moneda(i*300,470,20));
+            coins1.push_back(new moneda(i*350,470,20));
             scene->addItem(coins1.back());
         }
 
         //Inicializamos la ec. de mov
-        //double rad = (45*3.141598)/180;
-        movimiento = new Movimiento_p(30,30,100,0);
+        movimiento = new Movimiento_p(30,80,100,0);
         scene->addItem(ball);
         //scene->addItem(enemy);
         ball->setFlag(QGraphicsItem::ItemIsFocusable);
@@ -68,6 +65,7 @@ MainWindow::MainWindow(QWidget *parent)
         view->resize(ancho,largo);
         this->resize(ancho,largo);
         view->centerOn(ball->x(),ball->y());
+
         //timer para que vaya cayendo
         timer = new QTimer(this);
         timer->start(50);
@@ -178,10 +176,6 @@ MainWindow::MainWindow(QWidget *parent)
                             }
          }
 
-
-
-
-
         for(int j1=0;j1<enemy1.size();j1++){
                     scene->addItem(enemy1.at(j1));
                     /*timer1 = new QTimer(this);
@@ -204,22 +198,11 @@ MainWindow::MainWindow(QWidget *parent)
             w2->setGeometry(1200,50,150,50);
 
             QLabel *label = new QLabel(this);
-            label->setText("Puntuacion: ");
-    //        setBaseSize(QSize(600, 400));
-    //        label->resize(label->baseSize());
-    //        label->setScaledContents(true);
+            label->setText("PUNTUACIÓN: ");
             scene2->addWidget(label);
             ui->graphicsView->setScene(scene2);
 
-            w2->show();
-
-
-
-
-
-
-
-
+//            w2->show();
 
     //connect(timer,SIGNAL(timeout()),this,SLOT(movers(60,180)));
 }
@@ -248,9 +231,10 @@ bool MainWindow::ComerMoneda()//recorremos toda la lista de monedas y vamos elim
     QList<moneda*>::iterator it;
     for(it=coins1.begin();it!=coins1.end();it++) {
         if((*it)->collidesWithItem(ball)) {
-            qDebug() << "COLISIONEEEEEEEEEES";
             scene->removeItem(*it);
             it=coins1.erase(it);
+            no_balas++;
+            qDebug() << "Balas: "<<no_balas;
             return true;
         }
     }
@@ -260,6 +244,7 @@ bool MainWindow::ComerMoneda()//recorremos toda la lista de monedas y vamos elim
 bool MainWindow::ExplotarBalas()//recorremos toda la lista de monedas y vamos eliminando las que chocamos
 {
     QList<enemigo*>::iterator it;
+    QList<enemigo1*>::iterator itr;
     QList<Bullet*>::iterator it2;
     for(it=enemy.begin();it!=enemy.end();it++) {
         for(it2=bullets.begin();it2!=bullets.end();it2++) {
@@ -267,6 +252,18 @@ bool MainWindow::ExplotarBalas()//recorremos toda la lista de monedas y vamos el
                 qDebug() << "BALA";
                 scene->removeItem(*it);
                 it=enemy.erase(it);
+                scene->removeItem(*it2);
+                it2=bullets.erase(it2);
+                return true;
+            }
+        }
+    }
+    for(itr=enemy1.begin();itr!=enemy1.end();itr++) {
+        for(it2=bullets.begin();it2!=bullets.end();it2++) {
+            if((*itr)->collidesWithItem(*it2)) {
+                qDebug() << "BALA";
+                scene->removeItem(*itr);
+                itr=enemy1.erase(itr);
                 scene->removeItem(*it2);
                 it2=bullets.erase(it2);
                 return true;
@@ -295,53 +292,18 @@ bool MainWindow::Morir() //Evaluamos cuando la nave choca con algun enemigo
             return true;
         }
     }
+    QList<pared*>::iterator it2;
+    for(it2=paredes.begin();it2!=paredes.end();it2++) {
+        if((*it2)->collidesWithItem(ball)) {
+            qDebug() << "MUERTE";
+            scene->removeItem(*it2);
+            it2=paredes.erase(it2);
+            return true;
+        }
+    }
+
+
     return false;
-}
-
-void MainWindow::keyPressEvent(QKeyEvent *evento)
-{
-    if(evento->key()==Qt::Key_D)
-    {
-        if(EvaluarColision()){
-            std::cout<<"Prueba"<<std::endl;
-           ball->MoveLeft();
-
-
-        }
-        else
-           ball->MoveRight();
-
-    }
-    else if(evento->key()==Qt::Key_A)
-     {
-        if(EvaluarColision()){
-            ball->MoveRight();
-            std::cout<<"Prueba"<<std::endl;
-        }
-        else
-            ball->MoveLeft();
-     }
-    else if(evento->key()==Qt::Key_W)
-    {
-      if(EvaluarColision()) {
-            ball->MoveDown();
-          std::cout<<"Prueba"<<std::endl;
-      }
-        else {
-            ball->MoveUp();
-            ball->MoveRight();
-      }
-    }
-    else if(evento->key()==Qt::Key_S)
-    {
-        if(EvaluarColision()) {
-            ball->MoveUp();
-            std::cout<<"Prueba"<<std::endl;
-        }
-        else
-           ball->MoveDown();
-    }
-
 }
 
 bool MainWindow::aleatorio(float p)
@@ -366,23 +328,23 @@ void MainWindow::setmulti(int band)
 
 void MainWindow::Mover()
 {
+    //mov. parabolico (en caida de la nave)
     movimiento->CalcularVelocidad();
     movimiento->CalcularPosicion();
     ball->Mover(movimiento->getPosx(),movimiento->getPosy());
     ball->setPixmap(QPixmap(nave[1]).scaled(60,60));
 
 
-//    ball->MoveRight();
+    //ejecución de funciones que se necesitan ejecutar en todo momento
     view->centerOn(ball->x(),ball->y());
     score++;
     qDebug()<<score;
     ComerMoneda();
     Morir();
     ExplotarBalas();
-
 }
 
-void MainWindow::Movimiento()
+void MainWindow::Movimiento() //mov enemigo verde
 {
     for(int j=0;j<enemy.length();j++){
              enemy.at(j)->movimiento();
@@ -394,19 +356,18 @@ void MainWindow::Movimiento1()
 {
     for(int j=0;j<enemy1.length();j++){
              enemy1.at(j)->movimiento1();
-
     }
-
 }
-
-
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
     if(event->button() == Qt::RightButton) {
-    qDebug() << "Boton Der (Aux)";
-    bullets.push_back(new Bullet());
-    bullets.back()->setPos((movimiento->getPosx()+35),(movimiento->getPosy()-8));
-    scene->addItem(bullets.back());
+        if(no_balas>0) {
+            qDebug() << "Boton Der (Aux)";
+            bullets.push_back(new Bullet());
+            bullets.back()->setPos((movimiento->getPosx()+35),(movimiento->getPosy()-8));
+            scene->addItem(bullets.back());
+            no_balas--;
+        }
     }
     else if(event->button() == Qt::LeftButton) {
         qDebug() << "Boton Izq (Principal)";

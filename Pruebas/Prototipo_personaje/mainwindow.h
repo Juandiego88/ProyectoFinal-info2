@@ -39,7 +39,6 @@ public slots:
     void Mover();
     void Movimiento();
     void Movimiento1();
-
     void mousePressEvent(QMouseEvent *event);
 
 
@@ -63,7 +62,6 @@ private:
 
 
     Movimiento_p *movimiento;
-    void keyPressEvent(QKeyEvent *evento);
     bool aleatorio(float p);
     int bandera=0;
     double ancho=1366;

@@ -16,6 +16,6 @@ QRectF pared::boundingRect() const
 
 void pared::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::blue);
+    painter->setBrush(Qt::darkGray);
     painter->drawRect(boundingRect());
 }
