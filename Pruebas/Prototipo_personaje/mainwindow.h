@@ -14,6 +14,8 @@
 #include "movimiento_p.h"
 #include "moneda.h"
 #include "bullet.h"
+#include "score.h"
+#include "score2.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -48,6 +50,8 @@ private:
     QGraphicsView *view, *v2;
     QMainWindow *w2;
     bolita *ball;
+    score *puntos;
+    score2 *balas;
 
     QList<pared*>paredes;
     QList<enemigo*>enemy;

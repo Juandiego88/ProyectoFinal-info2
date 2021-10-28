@@ -9,5 +9,7 @@
         <file>imagenes/fondo.jpg</file>
         <file>nave2.png</file>
         <file>nave1.png</file>
+        <file>imagenes/planeta.png</file>
+        <file>nave3.png</file>
     </qresource>
 </RCC>

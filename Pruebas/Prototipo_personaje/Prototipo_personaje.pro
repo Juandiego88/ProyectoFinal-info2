@@ -18,7 +18,9 @@ SOURCES += \
     menu.cpp \
     moneda.cpp \
     movimiento_p.cpp \
-    pared.cpp
+    pared.cpp \
+    score.cpp \
+    score2.cpp
 
 HEADERS += \
     bolita.h \
@@ -29,7 +31,9 @@ HEADERS += \
     menu.h \
     moneda.h \
     movimiento_p.h \
-    pared.h
+    pared.h \
+    score.h \
+    score2.h
 
 FORMS += \
     mainwindow.ui \

@@ -8,6 +8,8 @@ release/menu.o
 release/moneda.o
 release/movimiento_p.o
 release/pared.o
+release/score.o
+release/score2.o
 release/qrc_imagenes.o
 release/moc_bullet.o
 release/moc_mainwindow.o

@@ -15,8 +15,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
 
         //creamos escena
-        nave[0]=":/nave1.png";
-        nave[1]=":/nave2.png";
+        nave[0]=":/nave3.png";
+        nave[1]=":/nave3.png";
+//        nave[0]=":/nave1.png";
+//        nave[1]=":/nave2.png";
 
         ui->setupUi(this);
         scene = new QGraphicsScene(this);
@@ -36,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
         //creamos personaje
-        ball = new bolita(30,80,30);
+        ball = new bolita(30,80,60);
         //enemy = new enemigo1();
 
         //Creamos paredes (arriba y abajo)
@@ -137,7 +139,9 @@ MainWindow::MainWindow(QWidget *parent)
 
                 float random_numberx1 = rand() % 80000+20000;
                 float random_numbery1 = rand() % 500;
-                enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,2)));
+//                enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,2)));
+                                               //coeficiente de friccion: 0.5 - velocidad: 4
+                enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,(0.5*4))));
                             }
          }
 
@@ -146,7 +150,9 @@ MainWindow::MainWindow(QWidget *parent)
 
                 float random_numberx1 = rand() % 80000+40000;
                 float random_numbery1 = rand() % 500;
-                enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,2.5)));
+//                enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,2.5)));
+                                              //coeficiente de friccion: 0.65 - velocidad: 4
+                enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,0.65*4)));
                             }
          }
 
@@ -155,7 +161,9 @@ MainWindow::MainWindow(QWidget *parent)
 
                 float random_numberx1 = rand() % 80000+60000;
                 float random_numbery1 = rand() % 500;
-                enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,3)));
+//                enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,3)));
+                                               //coeficiente de friccion: 0.75 - velocidad: 4
+                enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,(0.75*4))));
                             }
          }
 
@@ -164,7 +172,9 @@ MainWindow::MainWindow(QWidget *parent)
 
                 float random_numberx1 = rand() % 80000+80000;
                 float random_numbery1 = rand() % 500;
-                enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,3.5)));
+//                enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,3.5)));
+                                               //coeficiente de friccion: 0.875 - velocidad: 4
+                enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,(0.875*4))));
                             }
          }
         for(int i1=0;i1<1000;i1++){
@@ -197,12 +207,21 @@ MainWindow::MainWindow(QWidget *parent)
             ui->graphicsView->setScene(scene2);
             w2->setGeometry(1200,50,150,50);
 
-            QLabel *label = new QLabel(this);
-            label->setText("PUNTUACIÓN: ");
-            scene2->addWidget(label);
-            ui->graphicsView->setScene(scene2);
+//            QLabel *label = new QLabel(this);
+//            label->setText("PUNTUACIÓN: ");
+//            scene2->addWidget(label);
+//            ui->graphicsView->setScene(scene2);
 
 //            w2->show();
+
+            //vamos a poner el score
+            puntos = new class score();
+            scene->addItem(puntos);
+
+            balas = new class score2();
+            scene->addItem(balas);
+
+
 
     //connect(timer,SIGNAL(timeout()),this,SLOT(movers(60,180)));
 }
@@ -233,7 +252,7 @@ bool MainWindow::ComerMoneda()//recorremos toda la lista de monedas y vamos elim
         if((*it)->collidesWithItem(ball)) {
             scene->removeItem(*it);
             it=coins1.erase(it);
-            no_balas++;
+            balas->setBalas(balas->getBalas()+1);
             qDebug() << "Balas: "<<no_balas;
             return true;
         }
@@ -342,6 +361,8 @@ void MainWindow::Mover()
     ComerMoneda();
     Morir();
     ExplotarBalas();
+    puntos->incrementar();
+    balas->mover();
 }
 
 void MainWindow::Movimiento() //mov enemigo verde
@@ -361,12 +382,12 @@ void MainWindow::Movimiento1()
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
     if(event->button() == Qt::RightButton) {
-        if(no_balas>0) {
+        if(balas->getBalas()>0) {
             qDebug() << "Boton Der (Aux)";
             bullets.push_back(new Bullet());
             bullets.back()->setPos((movimiento->getPosx()+35),(movimiento->getPosy()-8));
             scene->addItem(bullets.back());
-            no_balas--;
+            balas->setBalas(balas->getBalas()-1);
         }
     }
     else if(event->button() == Qt::LeftButton) {
