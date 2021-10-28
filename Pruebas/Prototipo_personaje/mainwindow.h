@@ -64,7 +64,6 @@ private:
     QList<Bullet*> bullets;
     QString nave[2];
 
-
     Movimiento_p *movimiento;
     bool aleatorio(float p);
     int bandera=0;
