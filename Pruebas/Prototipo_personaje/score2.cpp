@@ -4,7 +4,7 @@
 score2::score2(QGraphicsItem *parent) : QGraphicsTextItem(parent) {
     //inicializamos los puntos en 0
     balas = 0;
-    posx = 500, posy = 20;
+    posx = 550, posy = 20;
 
     //escribimos el texto
     setPlainText(QString("Balas: ") + QString::number(balas)); //puntos=0

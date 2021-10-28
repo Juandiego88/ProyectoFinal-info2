@@ -4,7 +4,7 @@
 score::score(QGraphicsItem *parent) : QGraphicsTextItem(parent) {
     //inicializamos los puntos en 0
     puntos = 0;
-    posx = 200, posy = 20;
+    posx = 250, posy = 20;
 
     //escribimos el texto
     setPlainText(QString("Puntuacion: ") + QString::number(puntos)); //puntos=0
@@ -16,10 +16,15 @@ score::score(QGraphicsItem *parent) : QGraphicsTextItem(parent) {
 void score::incrementar()
 {
     puntos++;
+}
+
+void score::mover()
+{
     posx+=5;
     setPlainText(QString("Puntuacion: ") + QString::number(puntos)); //puntos=0
     setPos(posx,posy);
 }
+
 
 int score::getpuntos()
 {

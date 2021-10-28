@@ -362,6 +362,7 @@ void MainWindow::Mover()
     Morir();
     ExplotarBalas();
     puntos->incrementar();
+    puntos->mover();
     balas->mover();
 }
 
@@ -401,6 +402,8 @@ void MainWindow::mousePressEvent(QMouseEvent *event){
         movimiento->CalcularPosicion();
         ball->Mover(movimiento->getPosx(),movimiento->getPosy());
         ball->setPixmap(QPixmap(nave[0]).scaled(60,60));
+        puntos->mover();
+        balas->mover();
     }
     else if(event->button() == Qt::MiddleButton) {
         qDebug() << "Boton del Medio (Centro)";

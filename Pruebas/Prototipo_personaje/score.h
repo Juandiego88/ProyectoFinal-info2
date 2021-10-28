@@ -13,6 +13,7 @@ private:
 public:
     score(QGraphicsItem * parent = 0);
     void incrementar();
+    void mover();
     int getpuntos();
 };
 
