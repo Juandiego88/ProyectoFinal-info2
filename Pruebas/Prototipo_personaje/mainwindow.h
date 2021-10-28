@@ -28,6 +28,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     bool EvaluarColision();
+    bool ComerMoneda();
+    bool Morir();
+    bool ExplotarBalas();
     int getmulti();
     void setmulti(int band);
     int numero=0;
@@ -54,8 +57,7 @@ private:
     QTimer *timer;
     QTimer *timer1;
     QTimer *timer2;
-    QList<moneda*> coins1;//monedas buenas
-    QList<moneda*> coins2;//monedas malas
+    QList<moneda*> coins1;
     QList<Bullet*> bullets;
     QString nave[2];
 

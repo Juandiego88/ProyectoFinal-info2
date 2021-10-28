@@ -38,10 +38,6 @@ MainWindow::MainWindow(QWidget *parent)
         ball = new bolita(30,30,30);
         //enemy = new enemigo1();
 
-
-
-
-
         //Creamos paredes
         /*paredes.push_back(new pared(0,0,1480,20));
         scene->addItem(paredes.back());
@@ -235,10 +231,69 @@ MainWindow::~MainWindow()
 
 bool MainWindow::EvaluarColision()//recorremos toda la lista evaluando si choca con alguna pared
 {
-    QList<pared*>::iterator it;
-    for(it=paredes.begin();it!=paredes.end();it++) {
-        if((*it)->collidesWithItem(ball))
+    QList<moneda*>::iterator it;
+    for(it=coins1.begin();it!=coins1.end();it++) {
+        if((*it)->collidesWithItem(ball)) {
+            qDebug() << "COLISIONEEEEEEEEEES";
+            scene->removeItem(*it);
+            it=coins1.erase(it);
             return true;
+        }
+    }
+    return false;
+}
+
+bool MainWindow::ComerMoneda()//recorremos toda la lista de monedas y vamos eliminando las que chocamos
+{
+    QList<moneda*>::iterator it;
+    for(it=coins1.begin();it!=coins1.end();it++) {
+        if((*it)->collidesWithItem(ball)) {
+            qDebug() << "COLISIONEEEEEEEEEES";
+            scene->removeItem(*it);
+            it=coins1.erase(it);
+            return true;
+        }
+    }
+    return false;
+}
+
+bool MainWindow::ExplotarBalas()//recorremos toda la lista de monedas y vamos eliminando las que chocamos
+{
+    QList<enemigo*>::iterator it;
+    QList<Bullet*>::iterator it2;
+    for(it=enemy.begin();it!=enemy.end();it++) {
+        for(it2=bullets.begin();it2!=bullets.end();it2++) {
+            if((*it)->collidesWithItem(*it2)) {
+                qDebug() << "BALA";
+                scene->removeItem(*it);
+                it=enemy.erase(it);
+                scene->removeItem(*it2);
+                it2=bullets.erase(it2);
+                return true;
+            }
+        }
+    }
+    return false;
+}
+bool MainWindow::Morir() //Evaluamos cuando la nave choca con algun enemigo
+{
+    QList<enemigo*>::iterator it;
+    for(it=enemy.begin();it!=enemy.end();it++) {
+        if((*it)->collidesWithItem(ball)) {
+            qDebug() << "MUERTE";
+            scene->removeItem(*it);
+            it=enemy.erase(it);
+            return true;
+        }
+    }
+    QList<enemigo1*>::iterator it1;
+    for(it1=enemy1.begin();it1!=enemy1.end();it1++) {
+        if((*it1)->collidesWithItem(ball)) {
+            qDebug() << "MUERTE";
+            scene->removeItem(*it1);
+            it1=enemy1.erase(it1);
+            return true;
+        }
     }
     return false;
 }
@@ -321,6 +376,9 @@ void MainWindow::Mover()
     view->centerOn(ball->x(),ball->y());
     score++;
     qDebug()<<score;
+    ComerMoneda();
+    Morir();
+    ExplotarBalas();
 
 }
 
