@@ -22,8 +22,6 @@ bolita::bolita(int x, int y, int r)
     this->radio=r;
     this->velocidad=10;
     setPixmap(QPixmap(":/nave3").scaled(radio*2,radio*2));
-//    setPixmap(QPixmap(":/nave3").scaled(radio*2,radio*2));
-//    setPixmap(QPixmap(":/nave2").scaled(radio*2,radio*2));
     setPos(posx,posy);
 
 }

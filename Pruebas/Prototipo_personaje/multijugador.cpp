@@ -8,13 +8,11 @@ Multijugador::Multijugador(int num,QString _nombre,QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Multijugador)
 {
-
-
     nombre=_nombre;
-    //creamos escena
     nave[0]=":/nave4.png";
     nave[1]=":/nave5.png";
 
+    //creamos escena
     ui->setupUi(this);
     scene = new QGraphicsScene(this);
     setGeometry(0,0,ancho,largo);
@@ -44,9 +42,7 @@ Multijugador::Multijugador(int num,QString _nombre,QWidget *parent) :
 
     //Inicializamos la ec. de mov
     movimiento = new Movimiento_p(30,80,100,0);
-
     scene->addItem(ball);
-
     ball->setFlag(QGraphicsItem::ItemIsFocusable);
     ball->setFocus();
 
@@ -60,9 +56,6 @@ Multijugador::Multijugador(int num,QString _nombre,QWidget *parent) :
     timer = new QTimer(this);
     timer->start(50);
     connect(timer,SIGNAL(timeout()),this,SLOT(Mover()));
-
-
-
 
     //creamos los enemigos
     srand(time(NULL));
@@ -114,8 +107,6 @@ Multijugador::Multijugador(int num,QString _nombre,QWidget *parent) :
     timer1->start(50);
     connect(timer1,SIGNAL(timeout()),this,SLOT(Movimiento()));
 
-
-
     srand(time(NULL));
     for(int i1=0;i1<100;i1++){
         if(aleatorio(0.5)){
@@ -123,7 +114,7 @@ Multijugador::Multijugador(int num,QString _nombre,QWidget *parent) :
             float random_numbery1 = rand() % 500;
                                            //coeficiente de friccion: 0.5 - velocidad: 4
             enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,(0.5*4))));
-                        }
+            }
      }
 
     for(int i1=0;i1<150;i1++){
@@ -132,7 +123,7 @@ Multijugador::Multijugador(int num,QString _nombre,QWidget *parent) :
             float random_numbery1 = rand() % 500;
                                           //coeficiente de friccion: 0.65 - velocidad: 4
             enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,0.65*4)));
-                        }
+            }
      }
 
     for(int i1=0;i1<200;i1++){
@@ -141,7 +132,7 @@ Multijugador::Multijugador(int num,QString _nombre,QWidget *parent) :
             float random_numbery1 = rand() % 500;
                                            //coeficiente de friccion: 0.75 - velocidad: 4
             enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,(0.75*4))));
-                        }
+            }
      }
 
     for(int i1=0;i1<300;i1++){
@@ -150,7 +141,7 @@ Multijugador::Multijugador(int num,QString _nombre,QWidget *parent) :
             float random_numbery1 = rand() % 500;
                                            //coeficiente de friccion: 0.875 - velocidad: 4
             enemy1.append((new enemigo1(random_numberx1,random_numbery1,60,(0.875*4))));
-                        }
+            }
      }
     for(int i1=0;i1<1000;i1++){
         if(aleatorio(0.8)){
@@ -307,14 +298,11 @@ void Multijugador::Mover()
     movimiento->CalcularPosicion();
     ball->Mover(movimiento->getPosx(),movimiento->getPosy());
 
-//    ball->setPixmap(QPixmap(nave[1]).scaled(60,60));
-
 
     //ejecución de funciones que se necesitan ejecutar en todo momento
     view->centerOn(ball->x(),ball->y());
-//    score++;
-  //  qDebug()<<score;
 
+    //manejo de archivos
     QFile archivo;
     QByteArray contenido;
     archivo.setFileName("../max_puntajes.txt");
@@ -329,7 +317,6 @@ void Multijugador::Mover()
     }
     bool ok;
     int puntaje = contenido.toInt(&ok, 10);
-//    qDebug() << puntaje+1;
 
     ComerMoneda();
     if(Morir()==true){

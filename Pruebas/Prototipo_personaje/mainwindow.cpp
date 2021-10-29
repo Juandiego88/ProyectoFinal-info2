@@ -16,8 +16,6 @@ MainWindow::MainWindow(QWidget *parent)
 
         nave[0]=":/nave3.png";
         nave[1]=":/nave3.png";
-//        nave[0]=":/nave1.png";
-//        nave[1]=":/nave2.png";
 
         //creamos escena
         ui->setupUi(this);
@@ -313,14 +311,12 @@ y adicionalmente se hacen comprobaciones como evaluar colisiones, etc*/
     movimiento->CalcularVelocidad();
     movimiento->CalcularPosicion();
     ball->Mover(movimiento->getPosx(),movimiento->getPosy());
-//    ball->setPixmap(QPixmap(nave[1]).scaled(60,60));
 
 
     //ejecución de funciones que se necesitan ejecutar en todo momento
     view->centerOn(ball->x(),ball->y());
-    score++;
-    qDebug()<<score;
 
+    //manejo de archivos (para comprobar la mayor puntiacion alcanzada)
     QFile archivo;
     QByteArray contenido;
     archivo.setFileName("../max_puntajes.txt");
@@ -330,13 +326,11 @@ y adicionalmente se hacen comprobaciones como evaluar colisiones, etc*/
     else if(archivo.exists()) {
         archivo.open(QIODevice::ReadWrite | QIODevice::Text);
         if(archivo.isOpen()) {
-            contenido = archivo.readAll();
+            contenido = archivo.readAll();//leemos lo que hay en el archivo
         }
     }
     bool ok;
-    int puntaje = contenido.toInt(&ok, 10);
-//    qDebug() << puntaje+1;
-
+    int puntaje = contenido.toInt(&ok, 10); //convertimos lo que leemos a entero
 
     ComerMoneda();
     if(Morir()==true){
@@ -347,11 +341,11 @@ y adicionalmente se hacen comprobaciones como evaluar colisiones, etc*/
 
         close();
         a =new muerte("Jugador",puntos->getpuntos());
-        if(puntos->getpuntos()>puntaje) {
+        if(puntos->getpuntos()>puntaje) {//en caso de haber alcanzado una mayor puntuacion que la maxima
             contenido.setNum(puntos->getpuntos());
             archivo.remove();
             archivo.open(QIODevice::ReadWrite | QIODevice::Text);
-            archivo.write(contenido);
+            archivo.write(contenido);//escribimos la nueva puntuación mayor
         }
         a->show();
     }
@@ -389,14 +383,12 @@ void MainWindow::mousePressEvent(QMouseEvent *event){ //Detectar clicks del mous
     else if(event->button() == Qt::LeftButton) {
         qDebug() << "Boton Izq (Principal)";
         //modificamos el mov de caida libre que tiene, para subir
-        //ball->setPixmap(QPixmap(nave[0]).scaled(60,60));
         movimiento->setPosy(movimiento->getPosy()-10);
         movimiento->setVel(100);
         movimiento->setAng(0);
         movimiento->CalcularVelocidad();
         movimiento->CalcularPosicion();
         ball->Mover(movimiento->getPosx(),movimiento->getPosy());
-//        ball->setPixmap(QPixmap(nave[0]).scaled(60,60));
         puntos->mover();
         balas->mover();
     }

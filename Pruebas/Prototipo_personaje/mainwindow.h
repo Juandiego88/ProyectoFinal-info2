@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QKeyEvent>
-#include <pared.h>
 #include <QList>
 #include <QTimer>
 #include <QGraphicsView>
@@ -19,6 +18,7 @@
 #include "score.h"
 #include "score2.h"
 #include "muerte.h"
+#include <pared.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -44,8 +44,6 @@ public slots:
     void Movimiento();
     void Movimiento1();
     void mousePressEvent(QMouseEvent *event);
-
-
 
 private:
     QGraphicsScene *scene, *scene2;
