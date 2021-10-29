@@ -16,5 +16,8 @@
         <file>imagenes/galaxia.jpg</file>
         <file>imagenes/multiverso.png</file>
         <file>imagenes/VIDEOJUEGO.png</file>
+        <file>imagenes/icono.png</file>
+        <file>imagenes/image (2).png</file>
+        <file>imagenes/navecita.png</file>
     </qresource>
 </RCC>

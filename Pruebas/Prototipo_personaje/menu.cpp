@@ -7,6 +7,8 @@ Menu::Menu(QWidget *parent) :
     ui(new Ui::Menu)
 {
     ui->setupUi(this);
+    setWindowTitle("BATTLE-AIRCRAFT");
+    setWindowIcon(QIcon(":/imagenes/navecita.png"));
 
 
 }
@@ -36,11 +38,6 @@ void Menu::on_pushButton_4_clicked()
     close();
 }
 
-void Menu::on_pushButton_3_clicked()
-{
-
-}
-
 void Menu::on_maximos_puntajes_clicked()
 {
     //Agregamos los mayores marcadores, desde un archivo
@@ -57,5 +54,5 @@ void Menu::on_maximos_puntajes_clicked()
         }
     }
     ui->label->setText(contenido);
-    qDebug() << contenido;
+    //qDebug() << contenido;
 }

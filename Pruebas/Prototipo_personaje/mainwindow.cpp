@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+
         nave[0]=":/nave3.png";
         nave[1]=":/nave3.png";
 //        nave[0]=":/nave1.png";
