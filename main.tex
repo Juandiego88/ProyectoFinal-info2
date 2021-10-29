@@ -1,0 +1,133 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{listings}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage{cite}
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        \vspace*{1cm}
+            
+        \Huge
+        \textbf{Diseño}
+            
+        \vspace{0.5cm}
+        \LARGE
+        Proyecto Final (Videojuego)\\BATTLE-AIRCRAFT
+            
+        \vspace{1.5cm}
+            
+        \textbf{Juan Diego Sanchez\\David Santiago Rojo}
+            
+        \vfill
+            
+        \vspace{0.8cm}
+            
+        \Large
+        Departamento de Ingeniería Electrónica y Telecomunicaciones\\
+        Universidad de Antioquia\\
+        Medellín\\
+        Octubre de 2021
+            
+    \end{center}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+\section{Sección introductoria}\label{intro}En este proyecto final de la materia INFORMÁTICA II, se lleva acabo la creación de un videojuego, en el cual se hace un uso detallado de todo lo visto durante el semestre, en el cual se evalúa totalmente el desarrollo de los conocimientos durante el curso, este se lleva a cabo en C++, a través del paradigma de la programación orientada a objetos, en este caso usando el \textit{framerwork Qt}, para llevar a cabo el desarrollo de la interfaz gráfica. Este proyecto ya se viene diseñando desde inicios del curso, y siendo consecuentes con la idea que se planteo desde un inicio, este proyecto sigue la idea original, de desarrollar un juego tipo “Arcade”, en este caso de naves espaciales, con diferentes tipos de obstáculos y de enemigos, esta idea permite llevar a cabo todos los requisitos planteados por los maestros, por lo tanto, se continua el desarrollo a partir de lo antes pensando, finalmente será presentado con su respectivo informe, manual de uso, la aplicación totalmente desarrollada y un video de explicación sobre todo el proyecto realizado.
+
+\section{Clases} \label{contenido}
+Descripción de cada una de las clases, sus atributos y sus metodos, estos son tentativos y pueden ser cambiados durante el proceso de desarrollo, inicialmente son los que se cree que son necesarios para cumplir con los requerimientos
+\subsection{Personaje}
+\begin{itemize}
+    \item Atributos:
+    \begin{itemize}
+        \item posx; \textit{(posición en todo momento en x del elemento)}
+        \item posy; \textit{(posición en todo momento en y del elemento)}
+        \item velx; \textit{(velocidad en todo momento en x del elemento)}
+        \item vely; \textit{(velovidad en todo momento en y del elemento)}
+        \item tam;  \textit{(Tamaño del elemento)}
+    \end{itemize}
+    Métodos:
+    \begin{itemize}
+        \item Mov\_natural; \textit{(movimiento constante de la nave cayendo [mov. parabolico])}
+        \item Mov\_accionado; \textit{(movimiento accionado a través del teclado, hacia arriba [mov. parabolico])}
+        \item Disparar; \textit{(disparar a los enemigos)}
+        \item Comparar\_colisiones; \textit{(comprobación de colisiones contra las paredes)}
+        \item Ganar\_puntos; \textit{(comprobación de los puntos obtenidos de diferentes formas)}
+    \end{itemize}
+\end{itemize}
+
+\subsection{Enemigo}
+\begin{itemize}
+    \item Atributos:
+    \begin{itemize}
+        \item posx; \textit{(posición en todo momento en x del elemento)}
+        \item posy; \textit{(posición en todo momento en y del elemento)}
+        \item velx; \textit{(velocidad en todo momento en x del elemento)}
+        \item vely; \textit{(velovidad en todo momento en y del elemento)}
+        \item tam;  \textit{(Tamaño del elemento)}
+    \end{itemize}
+    Métodos:
+    \begin{itemize}
+        \item Mov\_rectilineo; \textit{(1er tipo de movimiento para enemigos [mov rect])}
+        \item Mov\_oscilatorio; \textit{(2do tipo de movimiento para enemigos [mov oscilatorio])}
+        \item Comprobar\_vida; \textit{(Comprobar el nivel de vida)}
+    \end{itemize}
+\end{itemize}
+
+\subsection{Balas}
+\begin{itemize}
+    \item Atributos:
+    \begin{itemize}
+        \item posx; \textit{(posición en todo momento en x del elemento)}
+        \item posy; \textit{(posición en todo momento en y del elemento)}
+        \item velx; \textit{(velocidad en todo momento en x del elemento)}
+        \item vely; \textit{(velovidad en todo momento en y del elemento)}
+        \item tam;  \textit{(Tamaño del elemento)}
+    \end{itemize}
+    Métodos:
+    \begin{itemize}
+        \item Detectar\_colision; \textit{(comprobación de si la bala colisiona con algun elemento y contra quien fue)}
+    \end{itemize}
+\end{itemize}
+
+\subsection{Estrellas}
+\begin{itemize}
+    \item Atributos:
+    \begin{itemize}
+        \item posx; \textit{(posición en todo momento en x del elemento)}
+        \item posy; \textit{(posición en todo momento en y del elemento)}
+        \item velx; \textit{(velocidad en todo momento en x del elemento)}
+        \item vely; \textit{(velovidad en todo momento en y del elemento)}
+        \item tam;  \textit{(Tamaño del elemento)}
+    \end{itemize}
+    Métodos:
+    \begin{itemize}
+        \item Estrellas\_buenas; \textit{(aparición de estrellas buenas)}
+        \item Estrellas\_malas; \textit{(aparición de estrellas malas)}
+    \end{itemize}
+\end{itemize}
+
+\section{Físicas empleadas} \label{contenido}
+Inicialmente se desea implementar diversos sistemas fisicos en este proyecto, buscando cumplir los requisitos propuestos se proyecta el uso de los siguientes modelos:
+\begin{itemize}
+    \item MRU [no cuenta]
+    \item MOV PARABÓLICO [si cuenta][para el personaje]
+    \item MOV OSCILATORIO (pendulo) [si cuenta] [para las estrellas]
+    \item MOV OSCILATORIO (gravitación) [si cuenta] [para los enemigos]
+\end{itemize}
+
+\section{Cronograma} \label{contenido}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{cronograma.png}
+    \caption{Cronograma por semanas}
+    \label{fig:cronograma}
+    \end{figure}
+
+\end{document}
