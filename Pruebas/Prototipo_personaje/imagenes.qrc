@@ -13,5 +13,7 @@
         <file>nave3.png</file>
         <file>nave4.png</file>
         <file>nave5.png</file>
+        <file>imagenes/galaxia.jpg</file>
+        <file>imagenes/multiverso.png</file>
     </qresource>
 </RCC>

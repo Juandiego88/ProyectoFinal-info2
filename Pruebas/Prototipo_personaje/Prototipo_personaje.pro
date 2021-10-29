@@ -18,6 +18,8 @@ SOURCES += \
     menu.cpp \
     moneda.cpp \
     movimiento_p.cpp \
+    muerte.cpp \
+    multijugador.cpp \
     pared.cpp \
     score.cpp \
     score2.cpp
@@ -31,13 +33,17 @@ HEADERS += \
     menu.h \
     moneda.h \
     movimiento_p.h \
+    muerte.h \
+    multijugador.h \
     pared.h \
     score.h \
     score2.h
 
 FORMS += \
     mainwindow.ui \
-    menu.ui
+    menu.ui \
+    muerte.ui \
+    multijugador.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -16,6 +16,7 @@
 #include "bullet.h"
 #include "score.h"
 #include "score2.h"
+#include "muerte.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

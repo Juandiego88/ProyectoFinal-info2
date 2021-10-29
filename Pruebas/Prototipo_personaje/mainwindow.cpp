@@ -320,7 +320,16 @@ y adicionalmente se hacen comprobaciones como evaluar colisiones, etc*/
     score++;
     qDebug()<<score;
     ComerMoneda();
-    Morir();
+    if(Morir()==true){
+        muerte *a;
+        timer->stop();
+        timer1->stop();
+        timer2->stop();
+
+        close();
+        a =new muerte("Jugador",puntos->getpuntos());
+        a->show();
+    }
     ExplotarBalas();
     puntos->incrementar();
     puntos->mover();

@@ -3,11 +3,10 @@
 
 #include <QWidget>
 #include <QGraphicsScene>
-
-#include <QFile>
-#include <QDebug>
-
 #include "mainwindow.h"
+#include "multijugador.h"
+#include "muerte.h"
+#include <QDebug>
 
 namespace Ui {
 class Menu;
@@ -19,15 +18,18 @@ class Menu : public QWidget
 
 public:
     explicit Menu(QWidget *parent = nullptr);
-    MainWindow *a;
+
     ~Menu();
 
 private slots:
     void on_pushButton_clicked();
-    void on_pushButton_2_clicked();
-    void on_pushButton_4_clicked();
-    void on_maximos_puntajes_clicked();
 
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_4_clicked();
+
+    void on_pushButton_3_clicked();
+    void on_maximos_puntajes_clicked();
 private:
     Ui::Menu *ui;
 
