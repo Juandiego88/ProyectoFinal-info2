@@ -5,9 +5,9 @@
 #include <QLabel>
 //#include <stdlib.h>
 #include <QMouseEvent>
+
 int score=0;
 int no_balas=0;
-
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -176,13 +176,15 @@ MainWindow::MainWindow(QWidget *parent)
         w2->setGeometry(1200,50,150,50);
 //      w2->show();
 
-        //vamos a poner el score
+        //Agregamos los marcadores
         //puntos
         puntos = new class score();
         scene->addItem(puntos);
         //balas
         balas = new class score2();
         scene->addItem(balas);
+
+
 }
 
 MainWindow::~MainWindow()

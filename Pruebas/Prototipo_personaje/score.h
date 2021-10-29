@@ -3,12 +3,17 @@
 
 #include <QGraphicsTextItem>
 
+#include <iostream>
+#include <fstream>
+
 class score : public QGraphicsTextItem
 {
 private:
     //atributos de posición
     int puntos;
     int posx,posy;
+
+
 
 
 public:
@@ -19,6 +24,7 @@ public:
     void incrementar();
     void mover();
     int getpuntos();
+    void lectura();
 };
 
 #endif // SCORE_H

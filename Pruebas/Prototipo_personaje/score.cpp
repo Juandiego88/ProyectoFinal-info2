@@ -31,3 +31,5 @@ int score::getpuntos()
     return puntos;
 
 }
+
+
