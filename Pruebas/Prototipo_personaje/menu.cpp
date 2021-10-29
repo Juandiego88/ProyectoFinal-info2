@@ -19,52 +19,27 @@ Menu::~Menu()
 
 void Menu::on_pushButton_clicked()
 {
-//    MainWindow *a;
-
-
-      MainWindow *a;
-
-      a=new MainWindow();
-      a->show();
-
-
-//      a->show();
-
-
-//    a->numero=1;
-
-//    a->show();
-
-
-
-
-
-
+    MainWindow *a;
+    a=new MainWindow();
+    a->show();
 }
 
 void Menu::on_pushButton_2_clicked()
 {
-
-
     Multijugador *b;
     b=new Multijugador(0,"Jugador1");
     b->show();
-
-
 }
 
 void Menu::on_pushButton_4_clicked()
 {
     close();
-
-
 }
 
 void Menu::on_pushButton_3_clicked()
 {
 
 }
-
 
 void Menu::on_maximos_puntajes_clicked()
 {
@@ -81,7 +56,6 @@ void Menu::on_maximos_puntajes_clicked()
             contenido = a.readAll();
         }
     }
-//    ui->label->setText(QString("MAXIMOS PUNTAJES: "));
     ui->label->setText(contenido);
     qDebug() << contenido;
 }

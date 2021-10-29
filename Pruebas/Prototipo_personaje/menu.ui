@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>431</width>
-    <height>300</height>
+    <width>498</width>
+    <height>340</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-image: url(:/imagenes/fondo.jpg);</string>
+   <string notr="true">background-image: url(:/imagenes/VIDEOJUEGO.png);</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -43,7 +43,7 @@
       <string notr="true">color: rgb(255, 255, 255);</string>
      </property>
      <property name="text">
-      <string>Maximos Puntajes</string>
+      <string>Maximo Puntaje</string>
      </property>
     </widget>
    </item>
@@ -54,15 +54,21 @@
      </property>
      <property name="font">
       <font>
-       <family>Nirmala UI</family>
-       <pointsize>14</pointsize>
+       <family>OCR A Extended</family>
+       <pointsize>60</pointsize>
+       <weight>75</weight>
+       <italic>false</italic>
+       <bold>true</bold>
+       <underline>false</underline>
+       <strikeout>false</strikeout>
       </font>
      </property>
      <property name="autoFillBackground">
       <bool>false</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(255, 255, 255);</string>
+      <string notr="true">color: rgb(255, 0, 0);
+</string>
      </property>
      <property name="text">
       <string/>
@@ -83,12 +89,11 @@
     </widget>
    </item>
   </layout>
-  <zorder>layoutWidget</zorder>
   <zorder>pushButton_2</zorder>
-  <zorder>label</zorder>
   <zorder>pushButton_4</zorder>
   <zorder>pushButton</zorder>
   <zorder>maximos_puntajes</zorder>
+  <zorder>label</zorder>
  </widget>
  <resources/>
  <connections/>

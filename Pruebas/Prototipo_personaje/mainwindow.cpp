@@ -319,6 +319,24 @@ y adicionalmente se hacen comprobaciones como evaluar colisiones, etc*/
     view->centerOn(ball->x(),ball->y());
     score++;
     qDebug()<<score;
+
+    QFile archivo;
+    QByteArray contenido;
+    archivo.setFileName("../max_puntajes.txt");
+    if(!archivo.exists()) {
+        qDebug() << "El archivo no existe!";
+    }
+    else if(archivo.exists()) {
+        archivo.open(QIODevice::ReadWrite | QIODevice::Text);
+        if(archivo.isOpen()) {
+            contenido = archivo.readAll();
+        }
+    }
+    bool ok;
+    int puntaje = contenido.toInt(&ok, 10);
+//    qDebug() << puntaje+1;
+
+
     ComerMoneda();
     if(Morir()==true){
         muerte *a;
@@ -328,6 +346,12 @@ y adicionalmente se hacen comprobaciones como evaluar colisiones, etc*/
 
         close();
         a =new muerte("Jugador",puntos->getpuntos());
+        if(puntos->getpuntos()>puntaje) {
+            contenido.setNum(puntos->getpuntos());
+            archivo.remove();
+            archivo.open(QIODevice::ReadWrite | QIODevice::Text);
+            archivo.write(contenido);
+        }
         a->show();
     }
     ExplotarBalas();

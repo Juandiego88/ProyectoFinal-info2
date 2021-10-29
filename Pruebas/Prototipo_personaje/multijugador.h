@@ -9,6 +9,8 @@
 #include <QTimer>
 #include <QGraphicsView>
 #include <QString>
+#include <QDebug>
+#include <QFile>
 
 #include "enemigo.h"
 #include "bolita.h"

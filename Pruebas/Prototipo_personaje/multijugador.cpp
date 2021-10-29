@@ -3,7 +3,6 @@
 #include <iostream>
 #include <QDebug>
 #include <QLabel>
-//#include <stdlib.h>
 #include <QMouseEvent>
 Multijugador::Multijugador(int num,QString _nombre,QWidget *parent) :
     QMainWindow(parent),
@@ -15,8 +14,6 @@ Multijugador::Multijugador(int num,QString _nombre,QWidget *parent) :
     //creamos escena
     nave[0]=":/nave4.png";
     nave[1]=":/nave5.png";
-//        nave[0]=":/nave1.png";
-//        nave[1]=":/nave2.png";
 
     ui->setupUi(this);
     scene = new QGraphicsScene(this);
@@ -310,11 +307,6 @@ void Multijugador::Mover()
     movimiento->CalcularPosicion();
     ball->Mover(movimiento->getPosx(),movimiento->getPosy());
 
-
-
-
-
-
 //    ball->setPixmap(QPixmap(nave[1]).scaled(60,60));
 
 
@@ -322,6 +314,23 @@ void Multijugador::Mover()
     view->centerOn(ball->x(),ball->y());
 //    score++;
   //  qDebug()<<score;
+
+    QFile archivo;
+    QByteArray contenido;
+    archivo.setFileName("../max_puntajes.txt");
+    if(!archivo.exists()) {
+        qDebug() << "El archivo no existe!";
+    }
+    else if(archivo.exists()) {
+        archivo.open(QIODevice::ReadWrite | QIODevice::Text);
+        if(archivo.isOpen()) {
+            contenido = archivo.readAll();
+        }
+    }
+    bool ok;
+    int puntaje = contenido.toInt(&ok, 10);
+//    qDebug() << puntaje+1;
+
     ComerMoneda();
     if(Morir()==true){
         muerte *a;
@@ -331,6 +340,12 @@ void Multijugador::Mover()
 
         close();
         a =new muerte(nombre,puntos->getpuntos());
+        if(puntos->getpuntos()>puntaje) {
+            contenido.setNum(puntos->getpuntos());
+            archivo.remove();
+            archivo.open(QIODevice::ReadWrite | QIODevice::Text);
+            archivo.write(contenido);
+        }
         a->show();
     }
 
@@ -345,8 +360,6 @@ void Multijugador::Movimiento()
 {
     for(int j=0;j<enemy.length();j++){
              enemy.at(j)->movimiento();
-
-
     }
 }
 
@@ -355,10 +368,6 @@ void Multijugador::Movimiento1()
 
     for(int j=0;j<enemy1.length();j++){
            enemy1.at(j)->movimiento1();
-
-
-
-
     }
 }
 
